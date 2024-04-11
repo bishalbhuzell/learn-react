@@ -42,10 +42,14 @@ export default function Textform(props) {
         // console.log("copy text was clicked.");
         // setText("You have clicked on TExt Copy");
         
-        let newText = document.getElementById("myBox");
-        newText.select();
-        navigator.clipboard.writeText(newText.value);
-        document.getSelection().removeAllRanges()
+        // let newText = document.getElementById("myBox");
+        // newText.select();
+        // navigator.clipboard.writeText(newText.value);
+        // document.getSelection().removeAllRanges()
+        // props.showAlert("Text copied successfully", "success")
+        // document.title = 'TextUtils-Copy'
+
+        navigator.clipboard.writeText(text);
         props.showAlert("Text copied successfully", "success")
         document.title = 'TextUtils-Copy'
 
@@ -84,7 +88,7 @@ export default function Textform(props) {
 
     <div className="container my-3">
         <h2>Your text summary</h2>
-        <p>{text.split(" ").filter((element)=>{ return element.length!==0}).length} words and {text.length} characters</p>
+        <p>{text.split(/\s+/).filter((element)=>{ return element.length!==0}).length} words and {text.length} characters</p>
         <p>{0.008 * (text.split(" ").filter((element)=>{ return element.length!==0}).length)} Minutes to read </p>
 
         <h2>Preview</h2>
