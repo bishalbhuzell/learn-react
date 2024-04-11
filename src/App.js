@@ -3,6 +3,13 @@ import './App.css';
 import About from './components/About';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
+import Alert from './components/Alert';
+import{
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // Link
+} from "react-router-dom";
 
 
 // let name = "Bishal";
@@ -14,11 +21,38 @@ function App() {
     if(mode === 'light'){
       setMode('dark');
       document.body.style.backgroundColor = 'black';
+      showAlert("Dark mode has been enabled", "success")
+      document.title = 'TextUtils-Dark Mode'
+      
+      // setInterval(() => {
+      //   document.title = "Textutils is amazing"
+      // }, 2000);
+      // setInterval(() => {
+      //   document.title = " Install Textutils"
+      // }, 1000);
+
+      
     }
-    else
+    else{
     setMode('light');
     document.body.style.backgroundColor = 'white';
+    showAlert("Light mode has been enabled", "success")
+    document.title = 'TextUtils-Light Mode'
 
+
+    }
+  }
+
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type)=>{
+    setAlert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() =>{
+      setAlert(null);
+    },3000);
   }
 
   return (
@@ -34,12 +68,18 @@ function App() {
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, totam saepe incidunt alias molestiae quia nostrum earum modi, aspernatur ab consequuntur qui nulla repellendus praesentium architecto inventore quasi cum eius excepturi. Corporis, aliquid non!</p>
    </div> */}
 
+    <Router>
    <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode} />
    {/* <Navbar /> */}
+   <Alert alert={alert} />
    <div className='container my-3' >
-    <Textform heading="Enter the text to analyze" />
+        <Routes>
+          {/* <Route index element={<Textform />} /> */}
+          <Route path={'/'} element={ <Textform heading="Enter the text to analyze"  mode={mode} showAlert={showAlert} />} />
+          <Route path={'/about'} element={<About />} />
+        </Routes>
    </div>
-   <About />
+    </Router>
    </>
   );
 }

@@ -13,6 +13,8 @@ export default function Textform(props) {
         
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to Uppercase", "success")
+        document.title = 'TextUtils-Uppercase'
     }
     const handleLoClick = () =>{
         // console.log("lowercase was clicked." + text);
@@ -20,6 +22,10 @@ export default function Textform(props) {
         
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to Lowercase", "success")
+        document.title = 'TextUtils-Lowercase'
+
+
     }
     const handleClearClick = () =>{
         // console.log("Clear was clicked.");
@@ -27,6 +33,10 @@ export default function Textform(props) {
         
         let newText = "";
         setText(newText);
+        props.showAlert("Text area is cleared", "success")
+        document.title = 'TextUtils-Clear'
+
+
     }
     const handleCopy = () =>{
         // console.log("copy text was clicked.");
@@ -35,6 +45,10 @@ export default function Textform(props) {
         let newText = document.getElementById("myBox");
         newText.select();
         navigator.clipboard.writeText(newText.value);
+        props.showAlert("Text copied successfully", "success")
+        document.title = 'TextUtils-Copy'
+
+
     }
     const handleExtraSpace = () =>{
         // console.log("copy text was clicked.");
@@ -42,6 +56,10 @@ export default function Textform(props) {
         
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
+        props.showAlert("Extra space has been handled", "success")
+        document.title = 'TextUtils-ExtraSpace'
+
+
     }
 
     const handleOnChange = (event) =>{
@@ -50,7 +68,7 @@ export default function Textform(props) {
     }
     
   return (
-    <div className='container'>
+    <div className={`container text-${props.mode==='light'?'dark':'light'}`}>
         <h1>{props.heading}</h1>
     <div className="mb-3">
         {/* <label for="myBox" className="form-label">Example textarea</label> */}
@@ -69,7 +87,7 @@ export default function Textform(props) {
         <p>{0.008 * text.split(" ").length} Minutes to read </p>
 
         <h2>Preview</h2>
-        <p>{text} </p>
+        <p>{text.length>0?text:"Enter something for the preview"} </p>
     </div>
 
     </div>
