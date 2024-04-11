@@ -74,9 +74,14 @@ function App() {
    <Alert alert={alert} />
    <div className='container my-3' >
         <Routes>
-          {/* <Route index element={<Textform />} /> */}
-          <Route path={'/'} element={ <Textform heading="Enter the text to analyze"  mode={mode} showAlert={showAlert} />} />
-          <Route path={'/about'} element={<About />} />
+          {/* if we use exact then it will search for exact route  */}
+          {/* /users  --> component 1 it will render component 1 */}
+          {/* /users/home  --> component 2 it will render component of users if we didnot use exact  */}
+          {/* <Route  exact path={'/'} element={ <Textform heading="Enter the text to analyze"  mode={mode} showAlert={showAlert} />} /> */}
+
+          <Route  path={'/'} element={ <Textform heading="Try TextUtils"  mode={mode} showAlert={showAlert} />} />
+          
+          <Route path={'/about'} element={<About mode={mode} />} />
         </Routes>
    </div>
     </Router>
